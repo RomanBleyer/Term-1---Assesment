@@ -28,7 +28,6 @@ def welcome_to_quiz():
 
 def quiz_type_select():
     global quiz_questions
-    #
     print("Choose your quiz topic:")
     categories = quiz_questions_database["category"].unique() # get unique catagories
     for i, category in enumerate(categories, 1):
