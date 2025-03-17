@@ -1,6 +1,8 @@
 import pandas
 import os
 import random
+import time
+
 
 def variable_initualisation():
     # Perform all global variables here
@@ -10,14 +12,15 @@ def variable_initualisation():
     quiz_questions_database = pandas.read_csv('quiz_questions.csv') # Reads the CSV file into a DataFrame
 
 def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear') # Clears the screen based on the operating system
+    os.system('cls' if os.name == 'nt' else 'clear') 
 
 def fancy_clear_screen():
-    print("\n" * 100) # Prints 100 new lines to clear the screen
-    os.system('cls' if os.name == 'nt' else 'clear') # Clears the screen based on the operating system
+    print("\n" * 100)
+    os.system('cls' if os.name == 'nt' else 'clear') 
 
 def syntax_error():
     print("Your a fool fong stop trying to break my stuff... Or you just cant spell properly") # Prints a syntax error message
+    time.sleep(1)
     clear_screen() # Clears the screen
 
 def loading_screen():
@@ -26,26 +29,22 @@ def loading_screen():
 def welcome_to_quiz():
     pass # Placeholder for welcome screen functionality
 
-def finish_quiz():
-    print("You have completed all categories. Well done!")
-
 def quiz_type_select(selected_categories):
-    print("Choose your quiz topic:")
 
     counter = 1
     categories = quiz_questions_database["category"].unique()
-    available_categories = [category for category in categories if category not in selected_categories]
+
+    available_categories = list(set(categories) - set(selected_categories)) # remove unselected catagories
     
     if not available_categories:
         return False
 
-    for category in available_categories:
-        print(f"{counter}) {category}") # Prints all categories with good formatting
-        counter += 1
-
     global quiz_questions
     while True:
-        try:
+        try: 
+            print("Choose your quiz topic:")
+            for i, category in enumerate(available_categories, start=counter):
+                print(f"{i}) {category}")  # Prints categories with nice formatting      
             current_user_input = int(input("Enter the number of your chosen category: ")) # Prompts the user to choose a category
             if 1 <= current_user_input <= len(available_categories):
                 quiz_category = available_categories[current_user_input - 1] # Gets the selected category
@@ -53,9 +52,9 @@ def quiz_type_select(selected_categories):
                 selected_categories.append(quiz_category) # Add the selected category to the list
                 break
             else:
-                print("Invalid input. Please enter a number corresponding to a category.")
+                syntax_error()
         except ValueError:
-            print("Invalid input. Please enter a valid number.")
+            syntax_error()
     return True
 
 def begin_selected_questions():
@@ -71,27 +70,39 @@ def begin_selected_questions():
     # Split the options string into a list
     question_options = first_question['options'].split(', ')
     
-    # Print the question
-    print(f"{first_question['question']}")
-    
-    # Print each option with a number
+    print(f"{first_question['question']}") # This prints a question
     for i, option in enumerate(question_options, 1):
-        print(f"{i}) {option}")
-    
-    # Prompt the user to enter an answer
+        print(f"{i}) {option}")    
     current_user_input = input("Enter your answer: ")
-    
+
+
     # Get the correct answer
     current_correct_answer = str(first_question['answer']) # Convert the correct answer to a string
     
-    # Check if the user's answer is correct
-    if current_user_input.strip().lower() == current_correct_answer.strip().lower():
+    while True: # Makes sure the user inputs a valid answer
+        if not current_user_input.isdigit() or not (1 <= int(current_user_input) <= len(question_options)):
+            print(f"Invalid input. Please enter a number between 1 and {len(question_options)}.")
+        
+            print(f"{first_question['question']}") # if you a big poo poo head and get it wrong reprints the question
+            for i, option in enumerate(question_options, 1):
+                print(f"{i}) {option}")
+            current_user_input = input("Enter your answer: ")
+
+        else:
+            break
+
+    # check to see if their answer is correct after checking that it is valid
+    if question_options[int(current_user_input) - 1].strip().lower() == current_correct_answer.strip().lower():
         print("Correct!")
     else:
         print(f"Incorrect! The correct answer was: {current_correct_answer}")
     
-    # Remove the asked question from the DataFrame
+    # question from the DataFrame
     quiz_questions = quiz_questions.drop(quiz_questions.index[random_index]).reset_index(drop=True)
+
+def finish_quiz():
+    print("You have completed all categories. Well done!")
+
 
 def main(): # Mainline for the program
     try:
@@ -109,4 +120,4 @@ def main(): # Mainline for the program
         print(f"An error occurred: {error_location}")
         main()
 
-main() # Calls the main function to start the program
+main() # Commence
