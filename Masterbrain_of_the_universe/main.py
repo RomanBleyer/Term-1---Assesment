@@ -6,31 +6,13 @@ import time
 from typewriter_with_skip import typewriter_input
 from typewriter_with_skip import typewriter_with_skip
 
-
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear') 
-
-
-def fancy_clear_screen():
-    typewriter_with_skip("\n" * 100)
-    os.system('cls' if os.name == 'nt' else 'clear') 
-
-
-def quiz_database_initialisation():
-    return pandas.read_csv('quiz_questions.csv')  # Return the loaded quiz questions database
-
+from background_functions import quiz_database_initialisation, syntax_error
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 def welcome_to_quiz():
     # Print a welcome message
-    name = typewriter_input("What is your name? ")
+    name = typewriter_input("What is your name? ").replace(" ", "")
     typewriter_with_skip(f"Welcome to the quiz, {name}!")  # Greets the user
-
-
-def syntax_error():
-    # Print an error message for invalid input
-    typewriter_with_skip("Your a fool fong stop trying to break my stuff... Or you just cant spell properly")
-    time.sleep(1)
-    clear_screen()
 
 
 def quiz_type_select(selected_categories, quiz_questions_database, total_questions_attempted, total_questions_correct):
@@ -53,8 +35,7 @@ def quiz_type_select(selected_categories, quiz_questions_database, total_questio
             for i, category in enumerate(available_categories, start=counter):
                 typewriter_with_skip(f"{i}) {category}")  # Print categories with nice formatting
 
-            current_user_input = int(typewriter_input("Enter the number of your chosen category: "))  # Prompt the user to choose a category
-
+            current_user_input = int(typewriter_input("Enter the number of your chosen category: ")).replace(" ", "")  # Prompt the user to choose a category
             if 1 <= current_user_input <= len(available_categories):
                 quiz_category = available_categories[current_user_input - 1]  # Get the selected category
                 quiz_questions = quiz_questions_database[quiz_questions_database["category"] == quiz_category]  # Filter questions by category
@@ -84,7 +65,7 @@ def begin_selected_questions(quiz_questions, total_questions_attempted, total_qu
     for i, option in enumerate(question_options, 1):
         typewriter_with_skip(f"{i}) {option}")
 
-    current_user_input = typewriter_input("Enter your answer: ")
+    current_user_input = typewriter_input("Enter your answer: ").replace(" ", "")
 
     # Get the correct answer
     current_correct_answer = str(first_question['answer']).strip()
@@ -150,6 +131,5 @@ def main():  # Mainline for the program
     except Exception as error_location:
         typewriter_with_skip(f"An error occurred: {error_location}")
         main()
-
 
 main()  # Commence

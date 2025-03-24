@@ -17,8 +17,6 @@ else:  # Mac/Linux
 
 
 def typewriter_with_skip(text, speed=0.05):
-    """Typewriter effect with an option to skip when a key is pressed."""
-    
     # Enable non-blocking key detection on Mac/Linux
     if os.name != 'nt':
         old_settings = termios.tcgetattr(sys.stdin)
