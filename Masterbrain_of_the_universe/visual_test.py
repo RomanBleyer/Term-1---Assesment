@@ -4,5 +4,7 @@ effect = effect_print.Print("your text here\nwhat are you doooinnnggyour text he
 with effect.terminal_output() as terminal:
     for frame in effect:
         terminal.print(frame)
-
+#
 # notable effects VHSTape
+
+

@@ -8,7 +8,7 @@ def clear_screen():
 
 
 def fancy_clear_screen():
-    typewriter_with_skip("\n" * 100)
+    typewriter_with_skip("\n" * 15)
     os.system('cls' if os.name == 'nt' else 'clear') 
 
 def quiz_database_initialisation():

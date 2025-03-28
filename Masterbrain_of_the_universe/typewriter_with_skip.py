@@ -2,21 +2,28 @@ import os
 import sys
 import time
 
-# Vile mac compatabillity shenannagins
+# Cross-platform keypress detection
 if os.name == 'nt':  # Windows
     import msvcrt
     def key_pressed():
-        return msvcrt.kbhit()
+        if msvcrt.kbhit():
+            key = msvcrt.getch()
+            return key == b' '  # Check if the pressed key is the spacebar
+        return False
 else:  # Mac/Linux
     import select
     import termios
     import tty
     def key_pressed():
-        dr, dw, de = select.select([sys.stdin], [], [], 0)
-        return dr != []
+        dr, _, _ = select.select([sys.stdin], [], [], 0)
+        if dr:
+            key = sys.stdin.read(1)
+            return key == ' '  # Check if the pressed key is the spacebar
+        return False
 
 
 def typewriter_with_skip(text, speed=0.05):
+    """Displays text with a typewriter effect, allowing skipping with the spacebar."""
     # Enable non-blocking key detection on Mac/Linux
     if os.name != 'nt':
         old_settings = termios.tcgetattr(sys.stdin)
@@ -24,7 +31,7 @@ def typewriter_with_skip(text, speed=0.05):
 
     try:
         for i, char in enumerate(text):
-            if key_pressed():  # Skip effect if a key is pressed
+            if key_pressed():  # Skip effect if the spacebar is pressed
                 sys.stdout.write(text[i:])  # Print remaining text instantly
                 sys.stdout.flush()
                 break
@@ -37,22 +44,9 @@ def typewriter_with_skip(text, speed=0.05):
         if os.name != 'nt':
             termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
 
-# Cross-platform keypress detection
-if os.name == 'nt':  # Windows
-    import msvcrt
-    def key_pressed():
-        return msvcrt.kbhit()
-else:  # Mac/Linux
-    import select
-    import termios
-    import tty
-    def key_pressed():
-        dr, _, _ = select.select([sys.stdin], [], [], 0)
-        return dr != []
 
 def typewriter_input(prompt, speed=0.05):
-    """Displays the prompt with a typewriter effect, allowing user to skip."""
-    
+    """Displays the prompt with a typewriter effect, allowing skipping with the spacebar."""
     # Enable non-blocking key detection for Mac/Linux
     if os.name != 'nt':
         old_settings = termios.tcgetattr(sys.stdin)
@@ -60,7 +54,7 @@ def typewriter_input(prompt, speed=0.05):
 
     try:
         for i, char in enumerate(prompt):
-            if key_pressed():  # Skip effect if a key is pressed
+            if key_pressed():  # Skip effect if the spacebar is pressed
                 sys.stdout.write(prompt[i:])  # Print the remaining text instantly
                 sys.stdout.flush()
                 break
