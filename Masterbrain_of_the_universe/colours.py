@@ -69,7 +69,7 @@ class coloured_text_formats:
             "\033[38;5;105m", "\033[38;5;110m", "\033[38;5;111m", "\033[38;5;125m", "\033[38;5;126m",
             "\033[38;5;127m", "\033[38;5;128m", "\033[38;5;129m", "\033[38;5;133m", "\033[38;5;134m",
             "\033[38;5;135m", "\033[38;5;140m", "\033[38;5;141m", "\033[38;5;162m", "\033[38;5;163m",
-            "\033[38;5;164m", "\033[38;5;165m", "\033[38;5;169m", "\033[38;5;170m", "\033[38;5;171m"
+            "\033[38;5;164m", "\033[38;5;165m", "\033[38;5;169m", "\033[38;5;170m", "\033[38;5;171m",
         ]
         self.text = ''.join(f"{colors[i % len(colors)]}{char}" for i, char in enumerate(self.text)) + "\033[0m"
         return self
@@ -77,7 +77,7 @@ class coloured_text_formats:
 
 # Example usage
 print("border effect below")
-print(coloured_text_formats("                                                                                         \n").border().underline())
+print(coloured_text_formats("\n").border().underline())
 print(coloured_text_formats("This is paragraph text colouring\n").paragraph_colour())
 print(coloured_text_formats("Options colour series\n").option_colours())
 print(coloured_text_formats("You got this answer wrong!").inncorect_question_colour())
