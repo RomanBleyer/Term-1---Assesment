@@ -44,3 +44,8 @@ def syntax_error():
     time.sleep(1)
     clear_screen()
 
+def slow_fancy_clear_screen():
+    for i in range(0,30):
+        print(" ")
+        time.sleep(0.05)
+    clear_screen()
