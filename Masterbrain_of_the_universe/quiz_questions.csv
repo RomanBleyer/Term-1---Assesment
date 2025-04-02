@@ -1,13 +1,54 @@
-category,question,options,answer
-"Capitals","What is the capital of France?","Paris, London, Berlin, Madrid","1"
-"Capitals","What is the capital of Germany?","Paris, London, Berlin, Madrid","3"
-"Capitals","What is the capital of Spain?","Paris, London, Berlin, Madrid","4"
-"Capitals","What is the capital of England?","Paris, London, Berlin, Madrid","2"
-"Colors","What color is the sky on a clear day?","Blue, Green, Red, Yellow","1"
-"Colors","What color are bananas?","Yellow, Green, Red, Blue","1"
-"Colors","What color is grass?","Green, Blue, Red, Yellow","1"
-"Colors","What color is an apple?","Red, Blue, Green, Yellow","1"
-"Geography","What is the largest continent?","Asia, Africa, Europe, Australia","1"
-"Geography","What is the longest river in the world?","Nile, Amazon, Yangtze, Mississippi","1"
-"Geography","What is the tallest mountain in the world?","Everest, K2, Kangchenjunga, Lhotse","1"
-"Geography","What is the smallest country in the world?","Vatican City, Monaco, Nauru, San Marino","1"
+category,question,options,answer,stimulus,stimulus_warning
+"business_studies","What is the most appropriate legal structure for a high-risk business with limited funding and ownership?","Sole Proprietorship,Partnership,Limited Liability Company (LLC),Corporation","3",
+"business_studies","Which of the following is a key feature of a partnership as a legal structure?","Limited liability,Profit sharing,Formal registration required,Strict governmental oversight","2",
+"business_studies","In the context of economic globalization, what is a significant advantage for small businesses?","Access to larger markets,Higher operational costs,Limited access to technology,Increased local competition","1",
+"business_studies","Which of the following is most critical when assessing the impact of government regulations on a business?","The company's internal policies,The local consumer market,The nature of the industry,The business's ethical stance","3",
+"business_studies","Which of these is an example of an external influence on a small business?","Employee morale,Business leadership style,Economic recession,Internal company culture","3",
+"business_studies","What is the main purpose of intellectual property laws for a business?","To prevent employee theft,To protect creative work from unauthorized use,To regulate company profits,To establish business ownership","2",
+"business_studies","Which of these factors would most directly affect the pricing strategy of a business?","Employee salary structure,Competitor pricing,The company's internal team structure,Government tax rates","2",
+"business_studies","In the context of business finance, what is the role of a balance sheet?","To provide a summary of income and expenditures,To list assets, liabilities, and equity,To forecast future sales,To determine marketing budgets","2",
+"business_studies","How does a monopoly typically affect the market for a product?","Increases competition,Lowers prices,Increases product availability,Reduces competition","4",
+"business_studies","What is a potential disadvantage of franchising as a business expansion model?","Lower startup costs,Lack of managerial control,High initial profit,Limited market exposure","2",
+"business_studies","Which of the following is an example of an internal influence on a business?","Changes in tax policy,Technological advancements,Employee turnover,Inflation rates","3",
+"business_studies","How do supply chain disruptions affect a business's financial performance?","They decrease operational costs,They reduce employee turnover,They can increase costs and disrupt revenue,They always lead to increased revenue","3",
+"business_studies","What does SWOT analysis stand for in a business context?","Strengths,Weaknesses,Opportunities,Threats,Strategy,Work,Operational Targets","1",
+"business_studies","When evaluating the impact of a government regulation, what is most important for a business owner to assess?","The regulation's ease of enforcement,The regulation's impact on profitability and operational efficiency,The regulation's popularity with the public,The regulation's legal implications for employees","2",
+"business_studies","What is a common challenge businesses face during the startup phase?","Managing employee performance,Building brand recognition,Meeting environmental regulations,Establishing effective leadership","2",
+"business_studies","What is the impact of increased competition on a business's market share?","It generally increases prices,It can lower the business's market share,It has no effect on market dynamics,It stabilizes pricing strategies","2",
+"chemistry","In enzyme kinetics, the Michaelis constant (K_m) is best described as:","The maximum rate of an enzyme-catalyzed reaction,The substrate concentration at which the reaction rate is ½ of V_max,The total enzyme concentration,The equilibrium constant of the enzyme-substrate complex","2",
+"chemistry","A competitive inhibitor:","Decreases V_max with no change in K_m,Increases K_m without affecting V_max,Lowers both V_max and K_m,Has no effect on either V_max or K_m","2",
+"chemistry","The formation of a peptide bond between amino acids involves:","A dehydration synthesis reaction resulting in a covalent bond,The formation of a hydrogen bond between side chains,Ionic interactions between amino groups,A phosphorylation reaction that activates the carboxyl group","1",
+"chemistry","Which interaction is most critical in stabilizing an alpha-helix structure?","Disulfide bridges,Hydrogen bonding between backbone amide and carbonyl groups,Hydrophobic interactions among side chains,Ionic bonds between terminal residues","2",
+"chemistry","Changes in pH can affect enzyme activity by:","Altering the substrate concentration in the reaction,Modifying the ionization state of amino acid residues at the active site,Changing the enzyme's overall mass,Increasing the enzyme's temperature","2",
+"chemistry","In the glycolytic pathway, phosphofructokinase-1 (PFK-1) is allosterically regulated by:","An increase in NADH levels,The accumulation of pyruvate,ATP acting as a negative effector,The availability of oxygen","3",
+"chemistry","In bioenergetics, an overall exergonic reaction can result from coupling an endergonic reaction to an exergonic one because:","The endergonic reaction drives the exergonic reaction forward,The energy released from the exergonic reaction compensates for the energy required by the endergonic reaction,Both reactions proceed independently,Coupling increases the activation energy of the overall process","2",
+"chemistry","The peptide bond in proteins is a covalent bond formed by the condensation reaction between:","Two amino groups,An amino group and a phosphate group,The carboxyl group of one amino acid and the amino group of another,Two carboxyl groups","3",
+"chemistry","In aerobic respiration, which molecule functions as the final electron acceptor in the electron transport chain?","NAD⁺,FAD,O₂,CO₂","3",
+"chemistry","A radioactive sample decays according to the law: N = N₀ ⋅ e^(-λt) If λ = 0.05 s⁻¹ and N₀ = 1 x 10⁶, what is N after t = 10 s?","≈ 606,500,≈ 367,900,≈ 135,300,≈ 50,000","1",
+"chemistry","The half-life t₁/₂ is related to the decay constant λ by:","t₁/₂ = λ ⋅ ln(2),t₁/₂ = 1 / λ,t₁/₂ = ln(2) / λ,t₁/₂ = ln(λ)","3",
+"chemistry","For a nucleus with a mass defect Δm, the binding energy E is calculated using:","E = Δm ⋅ c²,E = Δm x c,E = Δm ⋅ c,E = c² ⋅ Δm","1",
+"chemistry","Given N(t) = N₀ ⋅ e^(-λt), when N(t) = 0.5 ⋅ N₀, then t equals:","t = ln(2) x λ,t = 1 / λ ⋅ ln(2),t = ln(2) / λ,t = 0.5 ⋅ λ","3",
+"chemistry","For uranium-235, if the mass defect is given as Δm = 0.2 u (with 1 u = 1.6605 x 10⁻²⁷ kg) and c = 3 x 10⁸ m/s, the energy released E is computed by:","E = 0.2 x 1.6605 x 10⁻²⁷ x (3 x 10⁸)² J,E = 1.6605 x 10⁻²⁷ / 0.2 x (3 x 10⁸) J,E = 0.2 x 1.6605 x 10⁻²⁷ x 3 x 10⁸ J,E = (3 x 10⁸)² ÷ (0.2 x 1.6605 x 10⁻²⁷) J","1",
+"chemistry","In beta-plus decay, the nuclear equation is represented as: A Z X → A (Z-1) Y + e⁺ + v What does the change Z-1 indicate?","The atomic number increases by 1,The atomic number decreases by 1,The mass number decreases by 1,The mass number remains unchanged","2",
+"chemistry","If a nuclear reaction has an energy balance given by Q = (m_initial - m_final) ⋅ c² and Q < 0, this indicates that the reaction is:","Exothermic,Endothermic,At equilibrium,Unrelated to energy change","2",
+"chemistry","Using N(t) = N₀ ⋅ e^(-λt), if 30% of a sample remains, then e^(-λt) =","0.3,0.7,1.3,-0.3","1",
+"chemistry","For a radioactive isotope with λ = 1.2 x 10⁻³ s⁻¹, the half-life t₁/₂ is approximately:","577.5 s,0.5775 s,0.693 s,1.2 s","1"
+"mathematics","Find the derivative of f(x) = x^x","x^(x-1),x^x(1+ln(x)),x^x(1-ln(x)),ln(x^x)","2",
+"mathematics","Solve the initial value problem: dy/dx = y tan(x), y(0) = 1","y = cos(x),y = sec(x),y = e^(-ln|cos(x)|),y = tan(x)+1","2",
+"mathematics","The closed-form for the sum ∑k=1n k² is given by:","n(n+1)(2n+1)/6,n(n+1)(n+2)/3,n²,n(n+1)/2","1",
+"mathematics","Evaluate lim(x→0) (e^x - 1 - x)/x²","0,1/2,1,2","1",
+"mathematics","Find the number of nonnegative integer solutions to x + y + z = 10","55,66,78,120","2",
+"mathematics","Determine the eigenvalues of the matrix M = [[2, 1], [1, 2]]","[2][2],[1][3],[0][4],[1][2]","2",
+"mathematics","For the quadratic equation ax² + bx + c = 0 to have a repeated real root, it is necessary that","b² = 2ac,b² = 4ac,b² = ac,4b² = ac","2",
+"mathematics","The sum S = ∑k=1n 1/k is asymptotically approximated by:","S=ln(n)+gamma,S=1/3,nIn(n),S=gammaLn(n)","1",
+"mathematics","Find lim(n→∞) n[(1 + 1/n)^n - e]","e,-e/2,e²,0","4",
+"mathematics","Compute the derivative of f(x) = ln(x² + 1)","2x/(x² + 1),x/(x² + 1),2/(x² + 1),1/(2x)","1",
+"mathematics","Evaluate ∫0^1 x/(1+x²) dx","1/2 ln(2),ln(2),1/4 ln(2),ln(2)-1","1",
+"mathematics","If f(x) = sin²(x), then f'\(x) is:","cos²( x),2sin(x)cos(x),sin(2x),Both B and C","4",
+"mathematics","Find the Maclaurin series expansion for f(x) = e^x up to the x³ term.","1 + x + x²/2 + x³/6,1 + x + x²/2 - x³/6,1 + 2x + x²/2 + x³/6,1 + x² + x³/6","1",
+"mathematics","Determine the radius of convergence for the power series ∑n=0∞ (3ⁿxⁿ)/n!","3,1/3,0,∞","4",
+"mathematics","Solve for x in e^x = 5","x = 5,x = ln(5),x = 1/5,x = 5ln(e)","2",
+"mathematics","Using the definition of the derivative, find f'(x) for f(x) = x^(1/3)","1/3 x^(-2/3),1/3 x^(2/3),x^(-1/3),1/x^(2/3)","1",
+"mathematics","Find the sum of the infinite series: S = 3 + 3/2 + 3/4 + 3/8 + ...","3,6,9,∞","6",
+"mathematics","If f(x) = cos(x), then the second derivative f''(x) is:","cos(x),-cos(x),-sin(x),sin(x)","2",
+

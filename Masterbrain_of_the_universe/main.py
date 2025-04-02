@@ -5,15 +5,18 @@ from background_functions import quiz_database_initialisation, clear_screen, fan
 # backround functions is to clean up main file
 from colours import coloured_text_formats
 from terminaltexteffects.effects import effect_vhstape
-
+from score_keeper import update_highscore, filename
 
 def welcome_to_quiz(): # nothing technical in this func, look to background_functions for cool BTS stuff relating to title stuff
     show_title_screen = False
     clear_screen()
     typewriter_with_skip(str(coloured_text_formats("Typewriter sections can be skipped by pressing space, it will not be counted on your answer\nThis is best played in terminal fullscreen!\n").paragraph_colour()))
     typewriter_with_skip(str(coloured_text_formats("\nMade by Roman with love!\n").border()))
+
+    player_name = typewriter_input(str(coloured_text_formats("What is you name:").paragraph_colour()), end="") or ""
+    
     while True:
-        typewriter_with_skip(str(coloured_text_formats("Would you like to see the title screen? (").paragraph_colour()), end="")
+        typewriter_with_skip(str(coloured_text_formats("\nWould you like to see the title screen? (").paragraph_colour()), end="")
         typewriter_with_skip(str(coloured_text_formats("Y").correct_question_colour()), end="")
         typewriter_with_skip(str(coloured_text_formats("/").paragraph_colour()), end="")
         typewriter_with_skip(str(coloured_text_formats("N").inncorect_question_colour()), end="")
@@ -62,6 +65,7 @@ def welcome_to_quiz(): # nothing technical in this func, look to background_func
         fancy_clear_screen()
     else:
         pass
+    return player_name
 
 
 def quiz_type_select(selected_categories, quiz_database, total_questions_attempted, total_questions_correct): # For selecting what catagory you will pick
@@ -72,7 +76,7 @@ def quiz_type_select(selected_categories, quiz_database, total_questions_attempt
 
     if len(available_categories) == 0: # if something somewhere fails and it tries to make you select nothing
         fancy_clear_screen()
-        finish_quiz()
+        quiz_finished()
         return False, None, selected_categories, total_questions_attempted, total_questions_correct
 
     if total_questions_attempted > 0:
@@ -81,9 +85,13 @@ def quiz_type_select(selected_categories, quiz_database, total_questions_attempt
         title_typewriter(str(coloured_text_formats(f"{border_effect}\n").border().underline()))
         typewriter_with_skip(str(coloured_text_formats("Your score is: (").paragraph_colour()), end="")
         time.sleep(0.25)
-        typewriter_with_skip(str(coloured_text_formats(total_questions_correct).correct_question_colour()), end="")
+        if total_questions_attempted <= total_questions_correct / 2:
+            typewriter_with_skip(str(coloured_text_formats(total_questions_correct).inncorect_question_colour()), end="")
+        else:
+            typewriter_with_skip(str(coloured_text_formats(total_questions_correct).correct_question_colour()), end="")
+        
         typewriter_with_skip(str(coloured_text_formats("/").paragraph_colour()), end="")
-        typewriter_with_skip(str(coloured_text_formats(total_questions_attempted).inncorect_question_colour()), end="")
+        typewriter_with_skip(str(coloured_text_formats(total_questions_attempted).option_colours()), end="")
         typewriter_with_skip(str(coloured_text_formats(")").paragraph_colour()), end="")
         print("\n \n")
         user_wants_to_stop_seeing_score = typewriter_input(str(coloured_text_formats("press enter to continue: ").paragraph_colour())).replace(" ", "") # remove space so typewriter skip acually works
@@ -143,7 +151,7 @@ def quiz_type_select(selected_categories, quiz_database, total_questions_attempt
 def begin_selected_questions(quiz_questions, total_questions_attempted, total_questions_correct): # plays questions from selected catagory, no code outsourcing
     if len(quiz_questions) == 0: # if something somehow breaks and it tries to give you a catagory with no questions 
         clear_screen()
-        finish_quiz()
+        quiz_finished()
         return quiz_questions, total_questions_attempted, total_questions_correct
 
     # sorting the questions into variables for use
@@ -192,10 +200,29 @@ def begin_selected_questions(quiz_questions, total_questions_attempted, total_qu
     return quiz_questions, total_questions_attempted, total_questions_correct
 
 
-def finish_quiz():
+def quiz_finished(total_questions_attempted, total_questions_correct, player_name):
     slow_fancy_clear_screen()
-    typewriter_with_skip("\n \n \nThis is a placeholder, score summmerisation is gonna be here.")
+    print("\n \n \n \n")
+    title_typewriter(str(coloured_text_formats(f"{border_effect}\n").border().underline())) # adds border fomat
+    typewriter_with_skip(str(coloured_text_formats("\n \n \nCongradulations on finishing the quiz!").paragraph_colour()))
 
+    typewriter_with_skip(str(coloured_text_formats("Your score is: (").paragraph_colour()), end="")
+    time.sleep(0.25)
+    if total_questions_attempted <= total_questions_correct / 2:
+        typewriter_with_skip(str(coloured_text_formats(total_questions_correct).inncorect_question_colour()), end="")
+    else:
+        typewriter_with_skip(str(coloured_text_formats(total_questions_correct).correct_question_colour()), end="")
+    
+    typewriter_with_skip(str(coloured_text_formats("/").paragraph_colour()), end="")
+    typewriter_with_skip(str(coloured_text_formats(total_questions_attempted).option_colours()), end="")
+    typewriter_with_skip(str(coloured_text_formats(")").paragraph_colour()), end="")
+    print("\n \n")
+    typewriter_with_skip(str(coloured_text_formats("Saving your score right now.").paragraph_colour()))
+    update_highscore(filename, player_name, total_questions_correct, total_questions_attempted)
+
+    user_wants_to_restart_quiz = typewriter_input(str(coloured_text_formats("If you want to restart this quiz, press any button or just simply close it!").paragraph_colour())).replace(" ", "") # remove space so typewriter skip acually works
+    #just adds a input buffer so you can remain on score screen forever
+    main()
 
 def main():
     try:
@@ -228,6 +255,8 @@ def main():
                 quiz_questions, total_questions_attempted, total_questions_correct = begin_selected_questions(
                     quiz_questions, total_questions_attempted, total_questions_correct
                 )
+            
+        quiz_finished()
 
     # Handle specific errors related to missing keys in the quiz data
     except KeyError as e:
