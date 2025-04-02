@@ -41,7 +41,7 @@ category,question,options,answer,stimulus,stimulus_warning
 "mathematics","Determine the eigenvalues of the matrix M = [[2, 1], [1, 2]]","[2][2],[1][3],[0][4],[1][2]","2",
 "mathematics","For the quadratic equation ax² + bx + c = 0 to have a repeated real root, it is necessary that","b² = 2ac,b² = 4ac,b² = ac,4b² = ac","2",
 "mathematics","The sum S = ∑k=1n 1/k is asymptotically approximated by:","S=ln(n)+gamma,S=1/3,nIn(n),S=gammaLn(n)","1",
-"mathematics","Find lim(n→∞) n[(1 + 1/n)^n - e]","e,-e/2,e²,0","4",
+"mathematics","Find lim(n→∞) n[(1 + 1/n)^n - e]","e,-e/2,e²,0","0",
 "mathematics","Compute the derivative of f(x) = ln(x² + 1)","2x/(x² + 1),x/(x² + 1),2/(x² + 1),1/(2x)","1",
 "mathematics","Evaluate ∫0^1 x/(1+x²) dx","1/2 ln(2),ln(2),1/4 ln(2),ln(2)-1","1",
 "mathematics","If f(x) = sin²(x), then f'\(x) is:","cos²( x),2sin(x)cos(x),sin(2x),Both B and C","4",
@@ -49,6 +49,5 @@ category,question,options,answer,stimulus,stimulus_warning
 "mathematics","Determine the radius of convergence for the power series ∑n=0∞ (3ⁿxⁿ)/n!","3,1/3,0,∞","4",
 "mathematics","Solve for x in e^x = 5","x = 5,x = ln(5),x = 1/5,x = 5ln(e)","2",
 "mathematics","Using the definition of the derivative, find f'(x) for f(x) = x^(1/3)","1/3 x^(-2/3),1/3 x^(2/3),x^(-1/3),1/x^(2/3)","1",
-"mathematics","Find the sum of the infinite series: S = 3 + 3/2 + 3/4 + 3/8 + ...","3,6,9,∞","6",
+"mathematics","Find the sum of the infinite series: S = 3 + 3/2 + 3/4 + 3/8 + ...","3,6,9,∞","2",
 "mathematics","If f(x) = cos(x), then the second derivative f''(x) is:","cos(x),-cos(x),-sin(x),sin(x)","2",
-
