@@ -27,3 +27,22 @@ def update_highscore(filename, player_name, total_questions_correct, total_quest
     # Update or add new score
     highscores[player_name] = score
     save_highscores(filename, highscores)
+
+# Function to get the top 5 high scores
+def get_top_highscores(filename, top_n=5):
+    highscores = load_highscores(filename)
+    
+    # Parse and sort highscores by total_questions_correct in descending order
+    sorted_highscores = sorted(
+        highscores.items(),
+        key=lambda x: int(x[1].split('/')[0]),  # Extract total_questions_correct
+        reverse=True
+    )
+    
+    # Get the top N entries
+    top_highscores = sorted_highscores[:top_n]
+    
+    # Print the top scores
+    print(f"\nTop {top_n} High Scores:")
+    for rank, (name, score) in enumerate(top_highscores, start=1):
+        print(f"{rank}. {name} - {score}")

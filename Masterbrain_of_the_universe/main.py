@@ -1,11 +1,13 @@
 import random, time
+import pandas
 from typewriter_with_skip import typewriter_input, typewriter_with_skip
 
-from background_functions import quiz_database_initialisation, clear_screen, fancy_clear_screen, title_typewriter, slow_fancy_clear_screen, border_effect, title_screen_typewriter_text, title_screen_glitched, title_screen_very_glitched, title_screen_very_very_glitched
 # backround functions is to clean up main file
+from background_functions import quiz_database_initialisation, clear_screen, fancy_clear_screen, title_typewriter, slow_fancy_clear_screen, border_effect, title_screen_typewriter_text, title_screen_glitched, title_screen_very_glitched, title_screen_very_very_glitched
+
 from colours import coloured_text_formats
 from terminaltexteffects.effects import effect_vhstape
-from score_keeper import update_highscore, filename
+from score_keeper import update_highscore, get_top_highscores, filename
 
 
 def welcome_to_quiz(): # nothing technical in this func, look to background_functions for cool BTS stuff relating to title stuff
@@ -69,7 +71,7 @@ def welcome_to_quiz(): # nothing technical in this func, look to background_func
     return player_name
 
 
-def quiz_type_select(selected_categories, quiz_database, total_questions_attempted, total_questions_correct): # For selecting what catagory you will pick
+def quiz_type_select(selected_categories, quiz_database, total_questions_attempted, total_questions_correct, player_name): # For selecting what catagory you will pick
     
     # Some quick variable init
     category_list = quiz_database["category"].unique()
@@ -77,7 +79,7 @@ def quiz_type_select(selected_categories, quiz_database, total_questions_attempt
 
     if len(available_categories) == 0: # if something somewhere fails and it tries to make you select nothing
         fancy_clear_screen()
-        quiz_finished()
+        quiz_finished(total_questions_correct, player_name, total_questions_attempted)
         return False, None, selected_categories, total_questions_attempted, total_questions_correct
 
     if total_questions_attempted > 0:
@@ -122,7 +124,7 @@ def quiz_type_select(selected_categories, quiz_database, total_questions_attempt
                     selected_category = available_categories[user_catagory_selection - 1]
                     filtered_questions = quiz_database[quiz_database["category"] == selected_category]
                     selected_categories.append(selected_category)
-                    return True, filtered_questions, selected_categories, total_questions_attempted, total_questions_correct  # Ensure 5 values are returned
+                    return True, filtered_questions, selected_categories, total_questions_attempted, total_questions_correct, player_name  # Ensure 6 values are returned
                 # mother of all input validations
                 else:
                     if available_categories != 1:
@@ -169,9 +171,21 @@ def begin_selected_questions(quiz_questions, total_questions_attempted, total_qu
             print("\n \n \n \n")
             title_typewriter(str(coloured_text_formats(f"{border_effect}\n").border().underline()))  # Adds border format
 
+            # Print the stimulus_warning if it exists and is not NaN
+            if 'stimulus_warning' in selected_question and not pandas.isna(selected_question['stimulus_warning']):
+                typewriter_with_skip(str(coloured_text_formats(f"\n{selected_question['stimulus_warning']}\n").syntax_error_colour().bold()))
+            else:
+                print(" ")  # Print a blank line if no stimulus_warning exists
+
+            # Print the stimulus if it exists and is not NaN
+            if 'stimulus' in selected_question and not pandas.isna(selected_question['stimulus']):
+                typewriter_with_skip(str(coloured_text_formats(f"\n{selected_question['stimulus']}\n").paragraph_colour()))
+            else:
+                print(" ")  # Print a blank line if no stimulus exists
+
             # Display the question
             typewriter_with_skip(str(coloured_text_formats(f"\n{selected_question['question']}\n").paragraph_colour().bold()))
-
+    
             # Display the options, properly formatted
             for option_index, option in enumerate(question_options, 1):
                 typewriter_with_skip(str(coloured_text_formats(f"{option_index}) {option.strip()}").option_colours()))  # Strip spaces
@@ -214,23 +228,25 @@ def quiz_finished(total_questions_correct, player_name, total_questions_attempte
     print("\n \n \n \n")
     title_typewriter(str(coloured_text_formats(f"{border_effect}\n").border().underline()))
 
-    title_typewriter(str(coloured_text_formats(f"{border_effect}\n").border().underline())) # adds border fomat
     typewriter_with_skip(str(coloured_text_formats("\n \n \nCongradulations on finishing the quiz!").paragraph_colour()))
 
     typewriter_with_skip(str(coloured_text_formats("Your score is: (").paragraph_colour()), end="")
     time.sleep(0.25)
-    print(coloured_text_formats(total_questions_correct).option_colours(), end="")
-    typewriter_with_skip(str(coloured_text_formats("/").paragraph_colour()), end="")
-    print(coloured_text_formats(total_questions_attempted).option_colours(), end="")
-    typewriter_with_skip(str(coloured_text_formats(")").paragraph_colour()), end="")
-    print("\n")
 
+    typewriter_with_skip(str(coloured_text_formats(str(total_questions_correct)).option_colours()), end="")
+    typewriter_with_skip(str(coloured_text_formats("/").paragraph_colour()), end="")
+    typewriter_with_skip(str(coloured_text_formats(str(total_questions_attempted)).option_colours()), end="")
+    typewriter_with_skip(str(coloured_text_formats(")").paragraph_colour()), end="")
+    print("\n \n")
     typewriter_with_skip(str(coloured_text_formats("Saving your score right now.").paragraph_colour()))
     update_highscore(filename, player_name, total_questions_correct, total_questions_attempted)
+
+    # Display the top 5 high scores
+    get_top_highscores('highscores.txt')
     time.sleep(2)
-    #user_wants_to_restart_quiz = typewriter_input(str(coloured_text_formats("If you want to restart this quiz, press any button or just simply close it!").paragraph_colour())).replace(" ", "") # remove space so typewriter skip acually works
+    user_wants_to_restart_quiz = typewriter_input(str(coloured_text_formats("If you want to restart this quiz, press any button or just simply close it!").paragraph_colour())).replace(" ", "") # remove space so typewriter skip acually works
     #just adds a input buffer so you can remain on score screen forever
-    #main()
+    main()
 
 def main():
     try:
@@ -249,8 +265,8 @@ def main():
         # Main loop for selecting quiz types and answering questions
         while True:
             # Update and reset variables
-            quiz_type_selected, quiz_questions, selected_categories, total_questions_attempted, total_questions_correct = quiz_type_select(
-                selected_categories, quiz_database, total_questions_attempted, total_questions_correct
+            quiz_type_selected, quiz_questions, selected_categories, total_questions_attempted, total_questions_correct, player_name = quiz_type_select(
+                selected_categories, quiz_database, total_questions_attempted, total_questions_correct, player_name
             )
 
             # Exit the loop if no quiz type is selected (e.g., no categories left)
@@ -268,14 +284,14 @@ def main():
         quiz_finished(total_questions_attempted, total_questions_correct, player_name)
 
     # Handle specific errors related to missing keys in the quiz data
-    except KeyError as e:
-        typewriter_with_skip(f"Error: Missing expected key in quiz data - {e}")
+    except KeyError as error:
+        typewriter_with_skip(f"Error: Missing expected key in quiz data - {error}")
     # Handle value-related errors (e.g., invalid input or empty database)
-    except ValueError as e:
-        typewriter_with_skip(f"Value Error: {e}")
+    except ValueError as error:
+        typewriter_with_skip(f"Value Error: {error}")
     # Handle any other unexpected errors
-    except Exception as e:
-        typewriter_with_skip(f"An unexpected error occurred: {e}")
+    except Exception as error:
+        typewriter_with_skip(f"An unexpected error occurred: {error}")
 
 
 # Start the program

@@ -18,7 +18,7 @@ else:  # Mac/Linux
 def typewriter_with_skip(text, speed=0.002, end="\n"):
     """Typewriter effect with an option to skip when a key is pressed."""
     text = str(text)  # Ensure text is a string
-    
+
     # Enable non-blocking key detection on Mac/Linux
     if os.name != 'nt':
         old_settings = termios.tcgetattr(sys.stdin)
@@ -46,7 +46,7 @@ def typewriter_with_skip(text, speed=0.002, end="\n"):
 def typewriter_input(prompt, speed=0.002, end=""):
     """Displays the prompt with a typewriter effect, allowing user to skip."""
     prompt = str(prompt)  # Ensure prompt is a string
-    
+
     # Enable non-blocking key detection for Mac/Linux
     if os.name != 'nt':
         old_settings = termios.tcgetattr(sys.stdin)
