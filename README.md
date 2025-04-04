@@ -10,6 +10,11 @@ https://github.com/RomanBleyer/Term-1---Assesment
 navagate to the repository
 Run the game from Main.py
 
+# Import requirements
+In your command line paste in
+pip install terminaltexteffects
+pip install pandas
+
 # Author
 
 https://github.com/RomanBleyer
@@ -17,3 +22,5 @@ https://github.com/RomanBleyer
 # license
 
 https://choosealicense.com/licenses/mit/
+
+
