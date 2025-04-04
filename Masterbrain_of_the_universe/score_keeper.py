@@ -1,4 +1,6 @@
 import os
+from typewriter_with_skip import typewriter_input, typewriter_with_skip
+from colours import coloured_text_formats
 
 filename = 'highscores.txt'  # File name set to 'highscores.txt'
 
@@ -38,11 +40,11 @@ def get_top_highscores(filename, top_n=5):
         key=lambda x: int(x[1].split('/')[0]),  # Extract total_questions_correct
         reverse=True
     )
-    
+
     # Get the top N entries
     top_highscores = sorted_highscores[:top_n]
     
     # Print the top scores
-    print(f"\nTop {top_n} High Scores:")
+    typewriter_with_skip(str(coloured_text_formats(f"\nTop {top_n} High Scores:").paragraph_colour().bold()))
     for rank, (name, score) in enumerate(top_highscores, start=1):
-        print(f"{rank}. {name} - {score}")
+        typewriter_with_skip(str(coloured_text_formats(f"{rank}. {name} - {score}").option_colours()))

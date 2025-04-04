@@ -1,14 +1,12 @@
 import random, time
 import pandas
 from typewriter_with_skip import typewriter_input, typewriter_with_skip
-
 # backround functions is to clean up main file
 from background_functions import quiz_database_initialisation, clear_screen, fancy_clear_screen, title_typewriter, slow_fancy_clear_screen, border_effect, title_screen_typewriter_text, title_screen_glitched, title_screen_very_glitched, title_screen_very_very_glitched
 
 from colours import coloured_text_formats
 from terminaltexteffects.effects import effect_vhstape
 from score_keeper import update_highscore, get_top_highscores, filename
-
 
 def welcome_to_quiz(): # nothing technical in this func, look to background_functions for cool BTS stuff relating to title stuff
     show_title_screen = False
@@ -68,8 +66,9 @@ def welcome_to_quiz(): # nothing technical in this func, look to background_func
         fancy_clear_screen()
     else:
         pass
+    typewriter_with_skip(str(coloured_text_formats("\nyou have two minutes to complete every question").paragraph_colour()))
+    time.sleep(1.5)
     return player_name
-
 
 def quiz_type_select(selected_categories, quiz_database, total_questions_attempted, total_questions_correct, player_name): # For selecting what catagory you will pick
     
@@ -167,6 +166,7 @@ def begin_selected_questions(quiz_questions, total_questions_attempted, total_qu
 
     while True:  # Loop for input validation
         try:
+
             fancy_clear_screen()
             print("\n \n \n \n")
             title_typewriter(str(coloured_text_formats(f"{border_effect}\n").border().underline()))  # Adds border format
@@ -220,7 +220,6 @@ def begin_selected_questions(quiz_questions, total_questions_attempted, total_qu
             time.sleep(1)
 
     return quiz_questions, total_questions_attempted, total_questions_correct
-
 
 def quiz_finished(total_questions_correct, player_name, total_questions_attempted):
 
