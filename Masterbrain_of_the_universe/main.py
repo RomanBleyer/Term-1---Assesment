@@ -66,8 +66,6 @@ def welcome_to_quiz(): # nothing technical in this func, look to background_func
         fancy_clear_screen()
     else:
         pass
-    typewriter_with_skip(str(coloured_text_formats("\nyou have two minutes to complete every question").paragraph_colour()))
-    time.sleep(1.5)
     return player_name
 
 def quiz_type_select(selected_categories, quiz_database, total_questions_attempted, total_questions_correct, player_name): # For selecting what catagory you will pick
